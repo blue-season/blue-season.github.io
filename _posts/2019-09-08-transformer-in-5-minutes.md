@@ -6,7 +6,7 @@ categories: [Machine Learning]
 
 The transformer architecture from *Attention is all you need* is the most
 important technology for natural language processing in recent years. 
-This post is basically a TL;DL + ELI5 version explaining this ingenious model design.
+This post is basically a TL;DR + ELI5 version explaining this ingenious model design.
 
 All code shown here are powered by [PyWarm](https://github.com/blue-season/pywarm), a high level PyTorch API that makes the network definitions super clean.
 
