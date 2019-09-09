@@ -6,9 +6,9 @@ categories: [Machine Learning]
 
 The transformer architecture from *Attention is all you need* is the most
 important technology for natural language processing in recent years. 
-This is basically a TL;DL + ELI5 version explaining this ingenious model design.
+This post is basically a TL;DL + ELI5 version explaining this ingenious model design.
 
-All code used here are powered by [PyWarm](https://github.com/blue-season/pywarm), which makes the network definitions super clean.
+All code shown here are powered by [PyWarm](https://github.com/blue-season/pywarm), a high level PyTorch API that makes the network definitions super clean.
 
 ## Transformer
 
@@ -82,9 +82,9 @@ def decoder(x, y, num_decoder=6, mask_x=None, mask_y=None, **kw):
 
 ## Feedforward
 
-- The feed-forward block is just two *dense* layers one after another
+A feed-forward block is just two *dense* layers one after another
 
-- The dense layers are essentially the most basic form of neural networks.
+- A dense layer is essentially the most basic form of neural networks.
 
 ```python
 def feed_forward(x, size_ff=2048, dropout=0.1, **kw):
@@ -97,25 +97,25 @@ def feed_forward(x, size_ff=2048, dropout=0.1, **kw):
 
 The attention mechanism is often considered the most important contribution of the transformer architecture.
 
-- In the most general sense, attention maps one sequence with the other to establish relative importance
+- In the most general sense, attention maps one sequence with another sequence to establish relative importance
 between all pairs of elements
 
 - If the second sequence is the same as the first one, it is then a *self-attention*
 
 - The attention algorithm works as follows:
 
-    - First, a *query* vector is extracted from the first sequence
+    - First, a *query* vector is derived from the first sequence
 
-    - Then, a pair of *key* vector and *value* vectors are extracted from the second sequence
+    - Then, a pair of *key* vector and *value* vectors are derived from the second sequence
 
-    - The similarity between the *key* and *query* is used as the attention weights
+    - The similarity between the *key* and *query* is measured and used as the attention weights
 
     - The attentions are then applied to the *value* vector to get a *memory* vector as output
 
 - A multi-head attention is obtained by splitting the *key*, *query* and *value* into shorter vectors 
   to work in parallel
 
-- This may work better than a single-head attention because each head may attend to different parts better
+    - This may work better than a single-head attention because each head may attend to different parts better
 
 ```python
 def multi_head_attention(
