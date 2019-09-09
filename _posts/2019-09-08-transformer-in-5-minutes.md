@@ -18,7 +18,7 @@ All code shown here are powered by [PyWarm](https://github.com/blue-season/pywar
 
 - The encoders encode a *source* sequence (for example, an English sentence) into a *memory* representation
 
-- The decoders compare the *memory* with a *target* sequence (for example, a corresponding sentence in spanish)
+- The decoders compare the *memory* with a *target* sequence (for example, a corresponding sentence in Spanish)
   to gain *experience* in order to handle future situations
 
 ```python
@@ -56,12 +56,12 @@ def encoder(x, num_encoder=6, **kw):
 
 Each decoder consists of three blocks:
 
-- A self-attention block for the *memory* (i.e. the output of the decoder stack)
+- A self-attention block for the *memory* (i.e. the output of the encoder stack)
 
     - Because the decoder has access to the entire *memory* sequence all at once, 
-      for any time steps, it may think that future can contribute to the past, which breaks causality
+      for any time steps, it may think that future steps can contribute to the past steps, which breaks causality
 
-    - To ensure causality, a mask is used to prevent future leaks into past:
+    - To ensure causality, a mask is used to prevent the future leaks into the past:
 
     ![causal mask](/images/2019-09-08/causal-mask.png)
 
