@@ -1,11 +1,12 @@
 ---
 layout: post
-title: Transformer in 5 minutes, without math
+title: Transformer in 5 minutes
 categories: [Machine Learning]
 ---
 
-The transformer architecture from [*Attention is all you need*](https://arxiv.org/abs/1706.03762) is the most
-important technology for natural language processing in recent years. This is basically a TL;DL + ELI5 version of this ingenious model design.
+The transformer architecture from *Attention is all you need* is the most
+important technology for natural language processing in recent years. 
+This is basically a TL;DL + ELI5 version explaining this ingenious model design.
 
 All code used here are powered by [PyWarm](https://github.com/blue-season/pywarm), which makes the network definitions super clean.
 
@@ -15,10 +16,10 @@ All code used here are powered by [PyWarm](https://github.com/blue-season/pywarm
 
 - Transformer == 6 encoders + 6 decoders
 
-- The encoders encode a *source* sequence into a *memory* representation
+- The encoders encode a *source* sequence (for example, an English sentence) into a *memory* representation
 
-- The decoders compare the *memory* with a *target* sequence to gain *experience*
-  in order to make future predictions
+- The decoders compare the *memory* with a *target* sequence (for example, a corresponding sentence in spanish)
+  to gain *experience* in order to handle future situations
 
 ```python
 def transformer(x, y, **kw):
@@ -32,12 +33,12 @@ def transformer(x, y, **kw):
 
 ![encoder](/images/2019-09-08/tf-encoder.png)
 
-- Each encoder consists of two blocks:
+Each encoder consists of two blocks:
 
-    - A self-attention block, that compares different positions in the *source* sequence to 
-      evaluate their relative importances (weights)
+- A self-attention block, that compares different positions in the *source* sequence to 
+  evaluate their relative importances (weights)
 
-    - A feed-forward block, that learns the *memory* representation
+- A feed-forward block, that learns the *memory* representation
 
 - We will discuss these two blocks shortly
 
@@ -53,7 +54,7 @@ def encoder(x, num_encoder=6, **kw):
 
 ![decoder](/images/2019-09-08/tf-decoder.png)
 
-- Each decoder consists of three blocks:
+Each decoder consists of three blocks:
 
 - A self-attention block for the *memory* (i.e. the output of the decoder stack)
 
@@ -99,9 +100,9 @@ The attention mechanism is often considered the most important contribution of t
 - In the most general sense, attention maps one sequence with the other to establish relative importance
 between all pairs of elements
 
-- If *the other* sequence is just the first one, it is then a *self-attention*
+- If the second sequence is the same as the first one, it is then a *self-attention*
 
-- In transformer, the attention algorithm works as follows:
+- The attention algorithm works as follows:
 
     - First, a *query* vector is extracted from the first sequence
 
@@ -109,13 +110,12 @@ between all pairs of elements
 
     - The similarity between the *key* and *query* is used as the attention weights
 
-    - The attention is then used to weight the *value* keys and to obtain the *memory* vector as output
+    - The attentions are then applied to the *value* vector to get a *memory* vector as output
 
-- A multi-head attention is obtained by splitting the *key*, *query* and *value* vectors into shorter vectors 
+- A multi-head attention is obtained by splitting the *key*, *query* and *value* into shorter vectors 
   to work in parallel
 
-- This may work better than a single-head attention because each head may attend to
-  different parts better
+- This may work better than a single-head attention because each head may attend to different parts better
 
 ```python
 def multi_head_attention(
@@ -148,9 +148,9 @@ def multi_head_attention(
 
 ## Residual Connection
 
-- All blocks in the transformer use the residual connection paradigm, which enables deeper networks
+- All blocks in the transformer use the residual connection paradigm, which enables deeper neural networks
 
-- In each block there is also a normalization step, which makes networks easier to training
+- In each block there is also a normalization step, which makes the network easier to train
 
 ```python
 def residual_add(x, layer, dropout=0.1, **kw):
@@ -165,8 +165,10 @@ def residual_add(x, layer, dropout=0.1, **kw):
 - Technically, the transformer architecture from the original paper also includes
   (word) embedding and positional encoding for the *source* and *target*, but usually
   people consider these as preprocessing steps and not part of the transformer.
-  Therefore, we will skip these today and cover these in another post. Just remember
-  these steps preprocess the input sequences to a format better suited for neural networks.
+  Therefore, we will skip them this time and cover these topics in later posts. Just remember
+  they preprocess the input sequences into a format better suited for neural networks.
+
+- [*Attention is all you need*](https://arxiv.org/abs/1706.03762)
 
 - The architecture diagram from the original paper is also included here as a reference
 
