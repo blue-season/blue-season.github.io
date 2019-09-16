@@ -82,9 +82,9 @@ def decoder(x, y, num_decoder=6, mask_x=None, mask_y=None, **kw):
 
 ## Feedforward
 
-A feed-forward block is just two *dense* layers one after another
+A feed-forward block is just two *linear* layers one after another
 
-- A dense layer is essentially the most basic form of neural networks.
+- A linear layer (sometimes also called *dense*, or *fully connected* layer) is essentially the most basic form of neural networks.
 
 ```python
 def feed_forward(x, size_ff=2048, dropout=0.1, **kw):
