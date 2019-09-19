@@ -26,12 +26,12 @@ For items not listed here, adhere to the PEP 8.
 
 Put closing parentheses at the same level of the last object. Do not put them on a new line.
 
-```Python
+```python
 x = dict(a=1, b=2,
     c=3, d=4, ) # closing parentheses same line, yes
 ```
 
-```Python
+```python
 x = dict(a=1, b=2,
     c=3, d=4
 ) # closing parentheses separate line, no
