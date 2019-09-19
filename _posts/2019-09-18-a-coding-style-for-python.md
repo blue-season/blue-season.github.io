@@ -14,7 +14,9 @@ Python already have an official style guide, PEP 8. It's first doctrine:
 
 "A Foolish Consistency is the Hobgoblin of Little Minds"
 
-That is why I need an upgrade from PEP 8.
+That is why I need an upgrade from PEP 8. 
+
+For items not listed here, adhere to the PEP 8.
 
 ## Max Line Length
 
@@ -24,12 +26,12 @@ That is why I need an upgrade from PEP 8.
 
 Put closing parentheses at the same level of the last object. Do not put them on a new line.
 
-```Python tab="Yes"
+```Python
 x = dict(a=1, b=2,
     c=3, d=4, ) # closing parentheses same line, yes
 ```
 
-```Python tab="No"
+```Python
 x = dict(a=1, b=2,
     c=3, d=4
 ) # closing parentheses separate line, no
@@ -42,7 +44,7 @@ Rationale: Python structures code with indentations rather than parentheses.
 Indent 1 level (4 spaces) for line continuation, or 2 levels to distinguish from the next line.
 Never align with opening delimiter:
 
-```Python tab="Yes"
+```Python
 foo = very_long_function_name(arg,
     var_one=1, var_two=2, var_three=3, ) # 1 level indent, yes
 
@@ -59,7 +61,7 @@ def very_long_function_name(arg, var_one=1, var_two=2,
     implementation_starts_here = 0
 ```
 
-```Python tab="No"
+```Python
 # what if the function name plus indent is really long, like 70 characters?
 foo = very_long_function_name(arg,
                               var_one=1,
@@ -75,7 +77,7 @@ Completely avoid blank lines inside function and methods.
 Instead, organize / refactor the code to be cleaner and shorter.
 If there is a really strong need, use an empty comment at the same level of indentation.
 
-```Python tab="Yes"
+```Python
 if __name__ == '__main__':
     step_1_part_1() # no blank lines, yes
     step_1_part_2()
@@ -93,7 +95,7 @@ if __name__ == '__main__':
     step_3_part_3()
 ```
 
-```Python tab="No"
+```Python
 if __name__ == '__main__':
     step_1_part_1() # blank lines, no
 
@@ -119,12 +121,12 @@ Rationale: If the code is very readable, the comment is likely to be redundant.
 
 In code, use single-quote `''` whenever possible. For docstring, use triple double quotes: `""" """`.
 
-```Python tab="Yes"
+```Python
 if __name__ == '__main__': # single quote, yes
     # more stuff
 ```
 
-```Python tab="No"
+```Python
 if __name__ == "__main__": # double quote, no
     # more stuff
 ```
