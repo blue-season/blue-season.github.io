@@ -44,7 +44,7 @@ Rationale: Python structures code with indentations rather than parentheses.
 Indent 1 level (4 spaces) for line continuation, or 2 levels to distinguish from the next line.
 Never align with opening delimiter:
 
-```Python
+```python
 foo = very_long_function_name(arg,
     var_one=1, var_two=2, var_three=3, ) # 1 level indent, yes
 
@@ -61,7 +61,7 @@ def very_long_function_name(arg, var_one=1, var_two=2,
     implementation_starts_here = 0
 ```
 
-```Python
+```python
 # what if the function name plus indent is really long, like 70 characters?
 foo = very_long_function_name(arg,
                               var_one=1,
@@ -77,7 +77,7 @@ Completely avoid blank lines inside function and methods.
 Instead, organize / refactor the code to be cleaner and shorter.
 If there is a really strong need, use an empty comment at the same level of indentation.
 
-```Python
+```python
 if __name__ == '__main__':
     step_1_part_1() # no blank lines, yes
     step_1_part_2()
@@ -95,7 +95,7 @@ if __name__ == '__main__':
     step_3_part_3()
 ```
 
-```Python
+```python
 if __name__ == '__main__':
     step_1_part_1() # blank lines, no
 
@@ -121,12 +121,12 @@ Rationale: If the code is very readable, the comment is likely to be redundant.
 
 In code, use single-quote `''` whenever possible. For docstring, use triple double quotes: `""" """`.
 
-```Python
+```python
 if __name__ == '__main__': # single quote, yes
     # more stuff
 ```
 
-```Python
+```python
 if __name__ == "__main__": # double quote, no
     # more stuff
 ```
@@ -143,12 +143,12 @@ Rationale: docstring is meant to be read by end users.
 
 If you don't want others to mess around with an object, add a single underscore before its name:
 
-```Python
+```python
 _do_not_mess_with_me
 ```
 
 If a function / method alters its inputs, add a single underscore after it:
 
-```Python
+```python
 i_mess_with_inputs_(x) # content of x will change after each call
 ```
