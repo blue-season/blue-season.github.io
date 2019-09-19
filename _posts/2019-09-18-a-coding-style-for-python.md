@@ -10,11 +10,11 @@ categories: [Python, Coding, Zen]
 
 ## PEP 8
 
-Python already have an official style guide, PEP 8. It's first doctrine:
+Python already has an official style guide, PEP 8. The first doctrine:
 
 "A Foolish Consistency is the Hobgoblin of Little Minds"
 
-That is why I need an upgrade from PEP 8. 
+Is the particular reason for an upgrade from PEP 8. 
 
 For items not listed here, adhere to the PEP 8.
 
@@ -137,7 +137,7 @@ Rationale: Easier to type. Simple is better than complex.
 Prefer detailed type information in the docstring than type annotations in the definitions.
 However, if the toolset can provide useful functionalities from type annotation, it's absolutly ok to use.
 
-Rationale: docstring is meant to be read by end users.
+Rationale: docstrings are meant to be read by end users.
 
 ## Naming Conventions
 
