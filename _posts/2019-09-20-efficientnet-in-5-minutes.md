@@ -12,7 +12,7 @@ All code shown here are powered by [PyWarm](https://github.com/blue-season/pywar
 
 ## Building blocks
 
-- The main building block, called *MBConv*, is similar to [MobileNet V2's](https://arxiv.org/abs/1905.11946).
+- The main building block, called *MBConv*, is similar to the bottleneck block from [MobileNet V2](https://arxiv.org/abs/1905.11946).
 
 ```python
 def conv_pad_same(x, size, kernel=1, stride=1, **kw):
@@ -52,7 +52,7 @@ def mb_block(x, size_out, expand=1, kernel=1, stride=1,
     return y
 ```
 
-- EfficientNet uses [Swish](https://arxiv.org/abs/1710.05941) instead of `ReLU6`.
+- EfficientNet uses [Swish](https://arxiv.org/abs/1710.05941) instead of [ReLU6](http://www.cs.utoronto.ca/~kriz/conv-cifar10-aug2010.pdf).
 
 ```python
 def swish(x):
@@ -61,7 +61,7 @@ def swish(x):
 
 - Adds [squeeze and excitation](https://arxiv.org/abs/1709.01507) at the block output.
 
-    - Use global average pooling to squeeze the entire receptive field into 1 channel embedding.
+    - Use [global average pooling](https://arxiv.org/abs/1312.4400) to squeeze the entire receptive field into 1 channel embedding.
 
     - Remap the 1 channel embedding into more channels via excitation.
 
@@ -91,28 +91,28 @@ def drop_connect(x, rate):
 
 ## Scaling
 
-The paper propose to scale up the width, depth, resolution propotionally to maximize performance gains.
+The paper proposes to scale up the width, depth, and resolution in a propotional way to maximize performance gains.
 
 - Width: number of channels (hidden dimensions).
 
 - Depth: total number of layers.
 
-- Resolution: the input image size. The authors use bicubic upsampling to increase the resolution of input images.
+- Resolution: the input image size. The authors used bicubic upsampling to increase the resolution of input images.
 
-- Intuitively, think the network as a cylinder, then depth will determine its height and the width and resolution determine the diameter.
+- Intuitively, thinking the network as a cylinder, then depth will determine its height and the width and resolution will determine the diameter.
 
-- Therefore, when scaling each dimensions, the propotions should be rougly:
+- Therefore, when scaling each dimensions, the ratio should be rougly:
 
-    ```
-    depth : width * width : resolution * resolution ~= 1 : 1 : 1
-    ```
+```
+depth : width * width : resolution * resolution ~= 1 : 1 : 1
+```
 
-- The paper propse 8 baselines, B0 to B7, by gradually scaling up theses dimensions propotionally, under some total FLOPS constraints.
+- The paper propsed 8 baselines, B0 to B7, by gradually scaling up theses dimensions under some total FLOPS constraints.
 
-- The B0 model has specification as follows:
+- The B0 model has a specification as follows:
 
 ```python
-b0 = (
+spec_b0 = (
 # size, expand, kernel, stride, repeat, squeeze_excitation, drop_connect
     (16, 1, 3, 1, 1, 0.25, 0.2),
     (24, 6, 3, 2, 2, 0.25, 0.2),
@@ -129,7 +129,7 @@ class WarmEfficientNet(nn.Module):
         warm.up(self, [2, 3, 32, 32])
     def forward(self, x):
         x = conv_bn_act(x, 32, kernel=3, stride=2)
-        for size, expand, kernel, stride, repeat, se, dc in b0:
+        for size, expand, kernel, stride, repeat, se, dc in spec_b0:
             for i in range(repeat):
                 stride = stride if i == 0 else 1
                 x = mb_block(x, size, expand, kernel, stride, se, dc)
@@ -153,8 +153,8 @@ class WarmEfficientNet(nn.Module):
 
 ## Notes
 
-- Some users have suggested that EfficientNet, although theoretically uses much fewer FLOPS and less memory, does not translate directly
-  to faster GPU inference and less GPU usage. In fact, some complained that the training speed is much slower than well-established ResNets.
+- Some users have suggested that EfficientNet, although theoretically uses much fewer FLOPS and smaller size, does not translate directly
+  to faster GPU inference and less GPU memory usage. In fact, some complained that the training speed is much slower than the well-established ResNets.
 
-- People have also mentioned that EfficientNet is very hard to train. You will need very precisely copy the hyperparameters and empoly all
-  the tricks in order to getting close to the reported performance.
+- People have also mentioned that EfficientNet is very hard to train. You will need to copy the hyperparameters very precisely and empoly all
+  the tricks mentioned in the paper in order to getting close to the reported performance.
