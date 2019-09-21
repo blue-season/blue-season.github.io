@@ -6,7 +6,7 @@ categories: [Machine Learning]
 
 [EfficientNet](https://arxiv.org/abs/1905.11946) is evolved from the [MobileNet V2](https://arxiv.org/abs/1905.11946) building blocks, with the key insight
 that scaling up the *width*, *depth* or *resolution* can improve a network's performance, and a balanced scaling of all three
-is the key to maximizing improvements.
+is the key to maximizing improvements. It achieves the state of the art performance with much less parameters and FLOPS than other architectures.
 
 All code shown here are powered by [PyWarm](https://github.com/blue-season/pywarm), a high level PyTorch API that makes the network definitions super clean.
 
