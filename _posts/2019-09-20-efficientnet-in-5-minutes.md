@@ -41,6 +41,7 @@ def conv_bn_act(x, size, kernel=1, stride=1, groups=1,
 
 def mb_block(x, size_out, expand=1, kernel=1, stride=1,
         se_ratio=0.25, dc_ratio=0.2):
+    """ Mobilenet Bottleneck Block. """
     size_in = x.shape[1]
     size_mid = size_in*expand
     y = conv_bn_act(x, size_mid, 1) if expand > 1 else x
@@ -92,7 +93,7 @@ def drop_connect(x, rate):
 
 ## Scaling
 
-The paper proposes to scale up the width, depth, and resolution in a propotional way to maximize performance gains.
+The paper proposes to scale up *width*, *depth*, and *resolution* propotionally in order to maximize performance gains.
 
 - Width: number of channels (hidden dimensions).
 
@@ -100,12 +101,12 @@ The paper proposes to scale up the width, depth, and resolution in a propotional
 
 - Resolution: the input image size. The authors used bicubic upsampling to increase the resolution of input images.
 
-- Intuitively, thinking the network as a cylinder, then depth will determine its height and the width and resolution will determine the diameter.
+- Intuitively, if we treat the network as a cylinder, then depth will determine its height and the width and resolution will determine its diameter.
 
-- Therefore, when scaling each dimensions, the ratio should be rougly:
+- Therefore, when scaling these three dimensions, the ratio should be roughly:
 
 ```
-depth : width * width : resolution * resolution ~= 1 : 1 : 1
+depth : width*width : resolution*resolution ~= 1 : 1 : 1
 ```
 
 - The paper propsed 8 baselines, B0 to B7, by gradually scaling up theses dimensions under some total FLOPS constraints.
