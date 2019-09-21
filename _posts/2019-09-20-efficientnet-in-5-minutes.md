@@ -4,18 +4,19 @@ title: Efficientnet in 5 minutes
 categories: [Machine Learning]
 ---
 
-[EfficientNet](https://arxiv.org/abs/1905.11946) is evolved from the MobileNet V2 building blocks, with the key insight
-that scaling up the width, depth or resolution can improve a network's performance, and a balanced scaling of all three
-is the key to maximize improvements.
+[EfficientNet](https://arxiv.org/abs/1905.11946) is evolved from the [MobileNet V2](https://arxiv.org/abs/1905.11946) building blocks, with the key insight
+that scaling up the *width*, *depth* or *resolution* can improve a network's performance, and a balanced scaling of all three
+is the key to maximizing improvements.
 
 All code shown here are powered by [PyWarm](https://github.com/blue-season/pywarm), a high level PyTorch API that makes the network definitions super clean.
 
 ## Building blocks
 
-- The main building block, called *MBConv*, is similar to the bottleneck block from [MobileNet V2](https://arxiv.org/abs/1905.11946).
+- The main building block, called *MBConv*, is similar to the bottleneck block from MobileNet V2.
 
 ```python
 def conv_pad_same(x, size, kernel=1, stride=1, **kw):
+    """ Same padding so that out_size*stride == in_size. """
     pad = 0
     if kernel != 1 or stride != 1:
         in_size, s, k = [torch.as_tensor(v)
