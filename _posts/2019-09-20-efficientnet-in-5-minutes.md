@@ -153,7 +153,7 @@ class WarmEfficientNet(nn.Module):
 
 ## Notes
 
-- Some users have suggested that EfficientNet, although theoretically uses much fewer FLOPS and smaller size, does not translate directly
+- Some users have suggested that EfficientNet, though theoretically uses much fewer FLOPS and number of parameters, does not translate directly
   to faster GPU inference and less GPU memory usage. In fact, some complained that the training speed is much slower than the well-established ResNets.
 
 - People have also mentioned that EfficientNet is very hard to train. You will need to copy the hyperparameters very precisely and empoly all
